@@ -9,7 +9,8 @@
  *  - يرسل رداً تلقائياً (HTML) للعميل يحتوي رقم طلبه
  */
 
-const OWNER_EMAIL = 'khaledalnemer@gmail.com';
+const OWNER_EMAIL = 'sheetlabstudio@gmail.com';
+const OWNER_CC = 'khaledalnemer@gmail.com'; // نسخة إشعار إضافية بكل طلب
 const BRAND = 'SheetLab';
 const TIMEZONE = 'Asia/Riyadh';
 const SHEET_NAME = 'Orders';
@@ -44,9 +45,10 @@ function doPost(e) {
       data.whatsapp, data.service, data.details, data.fileLink
     ]);
 
-    // إيميل المالك
+    // إيميل المالك (مع نسخة إشعار إضافية)
     MailApp.sendEmail({
       to: OWNER_EMAIL,
+      cc: OWNER_CC,
       subject: 'طلب جديد ' + requestId + ' — ' + (data.service || 'غير محدد'),
       htmlBody: ownerEmailHtml(requestId, timestamp, data),
       replyTo: data.email || OWNER_EMAIL,
@@ -153,23 +155,31 @@ function ownerEmailHtml(requestId, timestamp, d) {
   );
 }
 
-/** رد تلقائي HTML للعميل */
+/** رد تلقائي HTML للعميل — بلغة خليجية ترحيبية (RTL) */
 function customerEmailHtml(requestId, d) {
-  const hi = d.name ? ('مرحباً ' + escapeHtml(d.name) + '،') : 'مرحباً،';
+  const hi = d.name ? ('هلا والله فيك يا ' + escapeHtml(d.name) + '،') : 'هلا والله وغلا،';
   return baseEmail(
-    '<tr><td style="padding:0 0 16px;color:#18181b;font-size:16px;font-weight:600;">' + hi + '</td></tr>' +
-    '<tr><td style="padding:0 0 20px;color:#3f3f46;font-size:14px;line-height:1.8;">' +
-      'شكراً لتواصلك مع ' + BRAND + '. استلمنا طلبك بنجاح، وسنراجعه ونردّ عليك بعرض سعر نهائي ومدة تنفيذ في أقرب وقت.' +
+    '<tr><td dir="rtl" style="padding:0 0 14px;text-align:right;color:#18181b;font-size:17px;font-weight:700;">' + hi + '</td></tr>' +
+    '<tr><td dir="rtl" style="padding:0 0 18px;text-align:right;color:#3f3f46;font-size:14px;line-height:1.9;">' +
+      'حيّاك الله وأهلين فيك في ' + BRAND + '. وصلنا طلبك تمام، وإحنا سعداء إنك خصّيتنا بثقتك. ' +
+      'بنراجع طلبك عن قرب، ونرجع لك بأقرب وقت بعرض سعر واضح ومدة تنفيذ — بدون لف ولا دوران.' +
     '</td></tr>' +
-    '<tr><td style="padding:0 0 20px;">' +
-      '<div style="background:#f0fdfa;border:1px solid #99f6e4;border-radius:10px;padding:16px 18px;text-align:center;">' +
+    '<tr><td style="padding:0 0 18px;">' +
+      '<div dir="rtl" style="background:#f0fdfa;border:1px solid #99f6e4;border-radius:10px;padding:16px 18px;text-align:center;">' +
         '<div style="color:#0f766e;font-size:12px;font-weight:600;margin-bottom:6px;">رقم طلبك</div>' +
         '<div style="color:#134e4a;font-size:20px;font-weight:700;letter-spacing:.03em;">' + escapeHtml(requestId) + '</div>' +
       '</div>' +
     '</td></tr>' +
-    (d.service ? ('<tr><td style="padding:0 0 8px;color:#71717a;font-size:13px;">الخدمة المطلوبة: <span style="color:#18181b;font-weight:600;">' + escapeHtml(d.service) + '</span></td></tr>') : '') +
-    '<tr><td style="padding:12px 0 0;color:#a1a1aa;font-size:12px;line-height:1.7;">' +
-      'يرجى الاحتفاظ برقم الطلب للرجوع إليه في مراسلاتك معنا. تُخزَّن ملفاتك محلياً وتُحذف خلال 14 يوماً من التسليم.' +
+    (d.service ? ('<tr><td dir="rtl" style="padding:0 0 10px;text-align:right;color:#71717a;font-size:13px;">الخدمة اللي طلبتها: <span style="color:#18181b;font-weight:600;">' + escapeHtml(d.service) + '</span></td></tr>') : '') +
+    '<tr><td dir="rtl" style="padding:0 0 18px;text-align:right;color:#3f3f46;font-size:14px;line-height:1.9;">' +
+      'لا يهمك، إحنا معك خطوة بخطوة. تكفى احتفظ برقم طلبك فوق عشان نخدمك أسرع لو تواصلت معنا.' +
+    '</td></tr>' +
+    '<tr><td dir="rtl" style="padding:0 0 4px;text-align:right;color:#18181b;font-size:14px;font-weight:600;">' +
+      'شاكرين لك ثقتك، وحيّاك الله دايم.' +
+    '</td></tr>' +
+    '<tr><td dir="rtl" style="padding:0 0 14px;text-align:right;color:#71717a;font-size:13px;">فريق ' + BRAND + '</td></tr>' +
+    '<tr><td dir="rtl" style="padding:12px 0 0;text-align:right;color:#a1a1aa;font-size:12px;line-height:1.7;border-top:1px solid #f4f4f5;">' +
+      'خصوصيتك تهمّنا: ملفاتك تُخزَّن محلياً وتُحذف خلال 14 يوماً من التسليم.' +
     '</td></tr>',
     'تم استلام طلبك'
   );
