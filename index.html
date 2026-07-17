@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SheetLab — بياناتك جاهزة للقرار خلال ساعات</title>
+<meta name="description" content="خدمات بيانات مصغّرة سريعة: تنظيف ودمج وتحويل الملفات، تحليل الاستبيانات، ولوحات Power BI. تسليم بالساعات، وسريّة تُحذف خلال 14 يوماً.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* shadcn zinc — light */
+    --background:0 0% 100%;
+    --foreground:240 10% 3.9%;
+    --card:0 0% 100%;
+    --card-foreground:240 10% 3.9%;
+    --primary:240 5.9% 10%;
+    --primary-foreground:0 0% 98%;
+    --secondary:240 4.8% 95.9%;
+    --secondary-foreground:240 5.9% 10%;
+    --muted:240 4.8% 95.9%;
+    --muted-foreground:240 3.8% 46.1%;
+    --accent:240 4.8% 95.9%;
+    --accent-foreground:240 5.9% 10%;
+    --destructive:0 84.2% 60.2%;
+    --border:240 5.9% 90%;
+    --input:240 5.9% 90%;
+    --ring:240 5.9% 10%;
+    --radius:0.5rem;
+    --chart-2:173 58% 39%;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:hsl(var(--background)); color:hsl(var(--foreground));
+    font-family:"Inter","IBM Plex Sans Arabic","Noto Sans Arabic",-apple-system,Segoe UI,Tahoma,sans-serif;
+    -webkit-font-smoothing:antialiased; line-height:1.6;
+  }
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 1.5rem;}
+
+  /* nav */
+  nav{position:sticky; top:0; z-index:50; background:hsl(var(--background) / .8);
+    backdrop-filter:blur(8px); border-bottom:1px solid hsl(var(--border));}
+  nav .row{display:flex; align-items:center; justify-content:space-between; height:3.75rem;}
+  .logo{display:flex; align-items:center; gap:.55rem; font-weight:600; font-size:1.05rem; letter-spacing:-.01em;}
+  .logo .mark{width:1.75rem; height:1.75rem; border-radius:calc(var(--radius) - 2px);
+    background:hsl(var(--primary)); color:hsl(var(--primary-foreground));
+    display:grid; place-items:center; font-size:.8rem; font-weight:700;}
+  .nav-links{display:flex; align-items:center; gap:1.5rem; font-size:.875rem; color:hsl(var(--muted-foreground));}
+  .nav-links a:hover{color:hsl(var(--foreground));}
+
+  /* buttons */
+  .btn{display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
+    height:2.5rem; padding:0 1.15rem; border-radius:calc(var(--radius) - 1px);
+    font-size:.875rem; font-weight:500; cursor:pointer; border:1px solid transparent;
+    transition:opacity .15s, background .15s; font-family:inherit;}
+  .btn-primary{background:hsl(var(--primary)); color:hsl(var(--primary-foreground));}
+  .btn-primary:hover{opacity:.9;}
+  .btn-outline{background:transparent; color:hsl(var(--foreground)); border-color:hsl(var(--border));}
+  .btn-outline:hover{background:hsl(var(--accent));}
+  .btn-lg{height:2.85rem; padding:0 1.5rem; font-size:.95rem;}
+  .btn-block{width:100%;}
+
+  /* hero */
+  .hero{padding:4.5rem 0 3.5rem; text-align:center;}
+  .eyebrow{display:inline-flex; align-items:center; gap:.4rem; font-size:.75rem; font-weight:500;
+    color:hsl(var(--muted-foreground)); background:hsl(var(--secondary));
+    border:1px solid hsl(var(--border)); padding:.3rem .75rem; border-radius:9999px; margin-bottom:1.25rem;}
+  .eyebrow .dot{width:.4rem; height:.4rem; border-radius:9999px; background:hsl(var(--chart-2));}
+  .hero h1{font-size:2.75rem; line-height:1.15; font-weight:700; letter-spacing:-.03em; margin:0 auto 1rem; max-width:18ch;}
+  .hero p.lead{font-size:1.1rem; color:hsl(var(--muted-foreground)); max-width:52ch; margin:0 auto 1.75rem;}
+  .hero .cta{display:flex; gap:.75rem; justify-content:center; flex-wrap:wrap;}
+  .trust{display:flex; gap:1.25rem; justify-content:center; flex-wrap:wrap; margin-top:2rem;
+    font-size:.8rem; color:hsl(var(--muted-foreground));}
+  .trust span{display:inline-flex; align-items:center; gap:.4rem;}
+  .trust svg{flex:0 0 auto;}
+
+  /* section */
+  section.block{padding:3.25rem 0; border-top:1px solid hsl(var(--border));}
+  .sec-head{text-align:center; margin-bottom:2.25rem;}
+  .sec-head .label{font-size:.75rem; font-weight:600; text-transform:uppercase; letter-spacing:.08em;
+    color:hsl(var(--muted-foreground));}
+  .sec-head h2{font-size:1.85rem; font-weight:600; letter-spacing:-.02em; margin:.5rem 0 .35rem;}
+  .sec-head p{color:hsl(var(--muted-foreground)); font-size:.95rem; max-width:50ch; margin:0 auto;}
+
+  /* service cards */
+  .grid{display:grid; gap:1rem; grid-template-columns:repeat(auto-fill,minmax(255px,1fr));}
+  .svc{background:hsl(var(--card)); border:1px solid hsl(var(--border)); border-radius:var(--radius);
+    box-shadow:0 1px 2px 0 hsl(240 10% 3.9% / .05); padding:1.25rem; display:flex; flex-direction:column;}
+  .svc h3{margin:0; font-size:1rem; font-weight:600; letter-spacing:-.01em;}
+  .svc .en{display:block; font-size:.72rem; font-weight:400; color:hsl(var(--muted-foreground)); direction:ltr; margin-top:.15rem;}
+  .svc p{font-size:.83rem; color:hsl(var(--muted-foreground)); margin:.7rem 0 1.1rem; flex:1;}
+  .svc .meta{display:flex; align-items:center; justify-content:space-between; gap:.5rem;
+    padding-top:.9rem; border-top:1px solid hsl(var(--border));}
+  .price{font-size:.92rem; font-weight:600;}
+  .price small{font-size:.7rem; font-weight:400; color:hsl(var(--muted-foreground));}
+  .time{font-size:.72rem; color:hsl(var(--muted-foreground)); display:inline-flex; align-items:center; gap:.35rem;}
+
+  /* steps */
+  .steps{display:grid; gap:1.5rem; grid-template-columns:repeat(3,1fr);}
+  .step{text-align:center;}
+  .step .num{width:2.5rem; height:2.5rem; margin:0 auto .85rem; border-radius:9999px;
+    background:hsl(var(--secondary)); border:1px solid hsl(var(--border));
+    display:grid; place-items:center; font-weight:600; font-size:1rem;}
+  .step h4{margin:0 0 .35rem; font-size:1rem; font-weight:600;}
+  .step p{margin:0; font-size:.85rem; color:hsl(var(--muted-foreground));}
+
+  /* why cards */
+  .why{display:grid; gap:1rem; grid-template-columns:repeat(auto-fit,minmax(230px,1fr));}
+  .why .card{background:hsl(var(--card)); border:1px solid hsl(var(--border)); border-radius:var(--radius);
+    padding:1.25rem; box-shadow:0 1px 2px 0 hsl(240 10% 3.9% / .05);}
+  .why .ic{width:2.25rem; height:2.25rem; border-radius:calc(var(--radius) - 2px); margin-bottom:.85rem;
+    background:hsl(var(--secondary)); border:1px solid hsl(var(--border)); display:grid; place-items:center;}
+  .why h4{margin:0 0 .3rem; font-size:.95rem; font-weight:600;}
+  .why p{margin:0; font-size:.83rem; color:hsl(var(--muted-foreground));}
+
+  /* form */
+  .formwrap{max-width:640px; margin:0 auto;}
+  .formcard{background:hsl(var(--card)); border:1px solid hsl(var(--border)); border-radius:var(--radius);
+    box-shadow:0 1px 3px 0 hsl(240 10% 3.9% / .07); padding:1.75rem;}
+  .field{margin-bottom:1rem;}
+  .field.two{display:grid; grid-template-columns:1fr 1fr; gap:1rem;}
+  label{display:block; font-size:.82rem; font-weight:500; margin-bottom:.4rem;}
+  label .opt{color:hsl(var(--muted-foreground)); font-weight:400;}
+  input,select,textarea{width:100%; font-family:inherit; font-size:.9rem; color:hsl(var(--foreground));
+    background:hsl(var(--background)); border:1px solid hsl(var(--input)); border-radius:calc(var(--radius) - 2px);
+    padding:.6rem .75rem; transition:border-color .15s, box-shadow .15s;}
+  input:focus,select:focus,textarea:focus{outline:none; border-color:hsl(var(--ring));
+    box-shadow:0 0 0 3px hsl(var(--ring) / .12);}
+  textarea{resize:vertical; min-height:110px;}
+  .hint{font-size:.75rem; color:hsl(var(--muted-foreground)); margin-top:.9rem; text-align:center;}
+  .honey{position:absolute; left:-9999px; opacity:0; height:0; overflow:hidden;}
+  #formStatus{font-size:.85rem; margin-top:.85rem; text-align:center;}
+  #formStatus.err{color:hsl(var(--destructive));}
+  .success{text-align:center; padding:1.5rem .5rem;}
+  .success .check{width:3rem; height:3rem; margin:0 auto 1rem; border-radius:9999px;
+    background:hsl(var(--chart-2) / .12); border:1px solid hsl(var(--chart-2) / .3);
+    display:grid; place-items:center;}
+  .success h3{margin:0 0 .5rem; font-size:1.15rem; font-weight:600;}
+  .success p{margin:0 auto; font-size:.9rem; color:hsl(var(--muted-foreground)); max-width:40ch;}
+
+  /* footer */
+  footer{border-top:1px solid hsl(var(--border)); padding:2.5rem 0; margin-top:1rem;}
+  .foot-row{display:flex; justify-content:space-between; align-items:flex-start; gap:2rem; flex-wrap:wrap;}
+  footer .brand{font-weight:600; margin-bottom:.4rem;}
+  footer p{margin:0; font-size:.82rem; color:hsl(var(--muted-foreground)); max-width:42ch;}
+  .foot-contact{font-size:.85rem; color:hsl(var(--muted-foreground)); display:flex; flex-direction:column; gap:.4rem;}
+  .foot-contact a:hover{color:hsl(var(--foreground));}
+  .copyright{margin-top:1.75rem; font-size:.75rem; color:hsl(var(--muted-foreground)); text-align:center;}
+
+  @media(max-width:720px){
+    .hero h1{font-size:2.1rem;}
+    .steps{grid-template-columns:1fr; gap:1.75rem;}
+    .field.two{grid-template-columns:1fr;}
+    .nav-links{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="wrap row">
+    <div class="logo"><span class="mark">SL</span>SheetLab</div>
+    <div class="nav-links">
+      <a href="#services">الخدمات</a>
+      <a href="#how">كيف نعمل</a>
+      <a href="#why">لماذا نحن</a>
+    </div>
+    <a href="#request" class="btn btn-primary">اطلب الآن</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow"><span class="dot"></span>خدمات بيانات مصغّرة للأفراد والمنشآت الصغيرة والمتوسطة</span>
+    <h1>بياناتك جاهزة للقرار خلال ساعات لا أسابيع</h1>
+    <p class="lead">نحوّل ملفاتك غير المنظّمة إلى بيانات قابلة للاستخدام — تنظيف، دمج، تحويل، تحليل استبيانات، ولوحات Power BI. بسريّة تامة تُحذف بعد التسليم.</p>
+    <div class="cta">
+      <a href="#request" class="btn btn-primary btn-lg">ارفع طلبك الآن</a>
+      <a href="#services" class="btn btn-outline btn-lg">تصفّح الخدمات</a>
+    </div>
+    <div class="trust">
+      <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="hsl(173 58% 39%)" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>تسليم بالساعات</span>
+      <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="hsl(173 58% 39%)" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>سريّة تُحذف خلال 14 يوماً</span>
+      <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="hsl(173 58% 39%)" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>ضمان إعادة تنفيذ أو استرداد</span>
+      <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="hsl(173 58% 39%)" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>أسعار ثابتة معلومة</span>
+    </div>
+  </div>
+</header>
+
+<!-- SERVICES -->
+<section class="block" id="services">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="label">الخدمات</div>
+      <h2>اختر ما تحتاجه</h2>
+      <p>أسعار «تبدأ من» تُحسم نهائياً بعد الاطلاع على حجم الملف ونطاق العمل.</p>
+    </div>
+    <div class="grid">
+
+      <div class="svc">
+        <h3>تنظيف ملفات إكسل<span class="en">Excel Cleanup</span></h3>
+        <p>ترتيب وتنظيف ملف فوضوي وتوحيد التنسيق، مع تقرير ملاحظات بالأخطاء المكتشفة.</p>
+        <div class="meta"><span class="price">يبدأ من 150 <small>ريال</small></span><span class="time">2–4 ساعات</span></div>
+      </div>
+
+      <div class="svc">
+        <h3>إزالة التكرارات<span class="en">Duplicate Removal</span></h3>
+        <p>إزالة الصفوف المكرّرة وتوحيد المفاتيح، مع تقرير بالسجلات المحذوفة.</p>
+        <div class="meta"><span class="price">يبدأ من 100 <small>ريال</small></span><span class="time">~30 دقيقة</span></div>
+      </div>
+
+      <div class="svc">
+        <h3>دمج ملفات إكسل<span class="en">Merge Excel Files</span></h3>
+        <p>دمج حتى 5 ملفات في ملف موحّد منظّم جاهز للاستخدام.</p>
+        <div class="meta"><span class="price">يبدأ من 120 <small>ريال</small></span><span class="time">~ساعة</span></div>
+      </div>
+
+      <div class="svc">
+        <h3>تحويل صيغ الملفات<span class="en">File Conversion</span></h3>
+        <p>تحويل بين Excel و CSV و JSON و TXT بدقة وبلا فقدان بيانات.</p>
+        <div class="meta"><span class="price">يبدأ من 100 <small>ريال</small></span><span class="time">~30 دقيقة</span></div>
+      </div>
+
+      <div class="svc">
+        <h3>تحليل الاستبيانات<span class="en">Survey Analytics</span></h3>
+        <p>تحليل حتى 1000 استجابة، مع تقرير PDF ورسوم بيانية واضحة.</p>
+        <div class="meta"><span class="price">يبدأ من 250 <small>ريال</small></span><span class="time">يوم عمل</span></div>
+      </div>
+
+      <div class="svc">
+        <h3>لوحة Power BI مصغّرة<span class="en">Mini Power BI Dashboard</span></h3>
+        <p>لوحة من صفحة واحدة: 5 مؤشرات و3 رسوم، تُسلَّم بصيغة PBIX و PDF.</p>
+        <div class="meta"><span class="price">يبدأ من 350 <small>ريال</small></span><span class="time">يوم عمل</span></div>
+      </div>
+
+      <div class="svc">
+        <h3>فحص صحة اللوحة<span class="en">Dashboard Health Check</span></h3>
+        <p>مراجعة ملف PBIX واحد وتقرير تحسينات وملاحظات تقنية للأداء.</p>
+        <div class="meta"><span class="price">يبدأ من 200 <small>ريال</small></span><span class="time">ساعتان</span></div>
+      </div>
+
+      <div class="svc">
+        <h3>مراجعة SQL<span class="en">SQL Review</span></h3>
+        <p>مراجعة حتى 500 سطر، نسخة محسّنة وملاحظات أداء عملية.</p>
+        <div class="meta"><span class="price">يبدأ من 150 <small>ريال</small></span><span class="time">~ساعة</span></div>
+      </div>
+
+      <div class="svc">
+        <h3>مراجعة DAX<span class="en">DAX Review</span></h3>
+        <p>مراجعة حتى 15 Measure، نسخة محسّنة وتوصيات للتحسين.</p>
+        <div class="meta"><span class="price">يبدأ من 150 <small>ريال</small></span><span class="time">~ساعة</span></div>
+      </div>
+
+      <div class="svc">
+        <h3>أتمتة بايثون<span class="en">Python Automation</span></h3>
+        <p>سكربت لأتمتة عملية متكررة، مع الكود ودليل استخدام واضح.</p>
+        <div class="meta"><span class="price">يبدأ من 400 <small>ريال</small></span><span class="time">يوم عمل</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="block" id="how">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="label">كيف نعمل</div>
+      <h2>ثلاث خطوات فقط</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="num">١</div>
+        <h4>ارفع طلبك</h4>
+        <p>عبّئ النموذج بوصف مختصر لما تحتاجه وأرفق رابط الملف. نردّ عليك بعرض سعر نهائي ومدة تنفيذ.</p>
+      </div>
+      <div class="step">
+        <div class="num">٢</div>
+        <h4>ننفّذ العمل</h4>
+        <p>نبدأ بعد موافقتك، وننفّذ بجودة وسرعة خلال المدة المتفق عليها، مع ضمان إعادة التنفيذ إن لزم.</p>
+      </div>
+      <div class="step">
+        <div class="num">٣</div>
+        <h4>تستلم وتُحذف بياناتك</h4>
+        <p>تستلم الملف النهائي وتقرير الملاحظات، وتُحذف بياناتك من عندنا خلال 14 يوماً من التسليم.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="block" id="why">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="label">لماذا نحن</div>
+      <h2>سرعة وثقة ووضوح</h2>
+    </div>
+    <div class="why">
+      <div class="card">
+        <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="hsl(240 5.9% 10%)" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <h4>سرعة بالساعات</h4>
+        <p>معظم الخدمات تُسلَّم خلال ساعات إلى يوم عمل، لا أسابيع.</p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="hsl(240 5.9% 10%)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h4>سريّة تامة</h4>
+        <p>حذف بياناتك خلال 14 يوماً، بلا استخدام تدريبي، وتخزين محلي فقط.</p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="hsl(240 5.9% 10%)" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+        <h4>أسعار وضمان</h4>
+        <p>أسعار واضحة وضمان إعادة تنفيذ أو استرداد إن لم تكن راضياً.</p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="hsl(240 5.9% 10%)" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-5"/></svg></div>
+        <h4>تخصّص في البيانات</h4>
+        <p>تركيز على بيانات المنشآت الصغيرة والمتوسطة في الخليج والاستبيانات العربية.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REQUEST FORM -->
+<section class="block" id="request">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="label">ارفع طلبك</div>
+      <h2>أخبرنا بما تحتاجه</h2>
+      <p>عبّئ النموذج وسنردّ عليك بعرض سعر نهائي ومدة تنفيذ في أقرب وقت.</p>
+    </div>
+    <div class="formwrap">
+      <div class="formcard" id="formCard">
+        <!--
+          آلية الإرسال: FormSubmit — الطلبات تصل إلى khaledalnemer@gmail.com
+          مهم: أول مرة تُرسَل رسالة، يصلك إيميل تفعيل من FormSubmit لمرة واحدة — فعّله ليبدأ الاستقبال.
+          للخصوصية لاحقاً: بعد التفعيل يمكنك استبدال الإيميل في الرابط برمز عشوائي من FormSubmit.
+        -->
+        <form id="requestForm" action="https://formsubmit.co/khaledalnemer@gmail.com" method="POST">
+          <!-- إعدادات FormSubmit -->
+          <input type="hidden" name="_subject" value="طلب جديد من صفحة SheetLab">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <!-- مصيدة السبام (اتركها فارغة) -->
+          <input type="text" name="_honey" class="honey" tabindex="-1" autocomplete="off">
+
+          <div class="field two">
+            <div>
+              <label for="name">الاسم</label>
+              <input type="text" id="name" name="الاسم" required placeholder="اسمك الكامل">
+            </div>
+            <div>
+              <label for="email">البريد الإلكتروني</label>
+              <input type="email" id="email" name="email" required placeholder="you@example.com">
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="phone">واتساب / جوال <span class="opt">(اختياري)</span></label>
+            <input type="tel" id="phone" name="واتساب" placeholder="05xxxxxxxx" inputmode="tel">
+          </div>
+
+          <div class="field">
+            <label for="service">الخدمة المطلوبة</label>
+            <select id="service" name="الخدمة" required>
+              <option value="" disabled selected>اختر خدمة…</option>
+              <option>تنظيف ملفات إكسل — Excel Cleanup</option>
+              <option>إزالة التكرارات — Duplicate Removal</option>
+              <option>دمج ملفات إكسل — Merge Excel Files</option>
+              <option>تحويل صيغ الملفات — File Conversion</option>
+              <option>تحليل الاستبيانات — Survey Analytics</option>
+              <option>لوحة Power BI مصغّرة — Mini Power BI Dashboard</option>
+              <option>فحص صحة اللوحة — Dashboard Health Check</option>
+              <option>مراجعة SQL — SQL Review</option>
+              <option>مراجعة DAX — DAX Review</option>
+              <option>أتمتة بايثون — Python Automation</option>
+              <option>غير متأكد / خدمة أخرى</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="details">تفاصيل الطلب</label>
+            <textarea id="details" name="التفاصيل" required placeholder="اشرح باختصار ما تحتاجه: نوع الملف، حجمه التقريبي (عدد الصفوف/الأعمدة)، والنتيجة المطلوبة."></textarea>
+          </div>
+
+          <div class="field">
+            <label for="filelink">رابط الملف <span class="opt">(اختياري — Google Drive أو Dropbox)</span></label>
+            <input type="url" id="filelink" name="رابط_الملف" placeholder="https://drive.google.com/...">
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg btn-block">إرسال الطلب</button>
+          <div id="formStatus"></div>
+          <p class="hint">بإرسالك الطلب فأنت توافق على سياسة البيانات: تُخزَّن ملفاتك محلياً وتُحذف خلال 14 يوماً من التسليم.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-row">
+      <div>
+        <div class="brand"><span style="font-weight:700">SheetLab</span></div>
+        <p>نحوّل الملفات غير المنظّمة إلى بيانات جاهزة للقرار خلال ساعات، بسريّة تُحذف بعد التسليم.</p>
+        <p style="margin-top:.75rem; font-size:.78rem;">لا نستقبل: البيانات الطبية، البنكية، بطاقات الائتمان، البيانات الحكومية الحساسة، الرواتب، والهوية الوطنية.</p>
+      </div>
+      <div class="foot-contact">
+        <div style="color:hsl(var(--foreground)); font-weight:600; margin-bottom:.2rem;">تواصل معنا</div>
+        <a href="mailto:khaledalnemer@gmail.com">khaledalnemer@gmail.com</a>
+        <a href="#request">ارفع طلباً</a>
+      </div>
+    </div>
+    <div class="copyright">© SheetLab — جميع الحقوق محفوظة.</div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var form = document.getElementById('requestForm');
+    var statusEl = document.getElementById('formStatus');
+    var card = document.getElementById('formCard');
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      // مصيدة السبام
+      if(form.querySelector('[name="_honey"]').value){ return; }
+
+      var btn = form.querySelector('button[type="submit"]');
+      var original = btn.textContent;
+      btn.disabled = true; btn.textContent = 'جاري الإرسال…';
+      statusEl.className = ''; statusEl.textContent = '';
+
+      var data = new FormData(form);
+      fetch('https://formsubmit.co/ajax/khaledalnemer@gmail.com', {
+        method:'POST',
+        headers:{'Accept':'application/json'},
+        body:data
+      })
+      .then(function(res){ return res.json().then(function(j){ return {ok:res.ok, body:j}; }); })
+      .then(function(r){
+        if(r.ok){
+          card.innerHTML =
+            '<div class="success">' +
+              '<div class="check"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="hsl(173 58% 39%)" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></div>' +
+              '<h3>تمّ استلام طلبك</h3>' +
+              '<p>شكراً لك. سنراجع طلبك ونردّ عليك بعرض سعر نهائي ومدة تنفيذ في أقرب وقت.</p>' +
+            '</div>';
+        } else {
+          throw new Error('failed');
+        }
+      })
+      .catch(function(){
+        statusEl.className = 'err';
+        statusEl.textContent = 'تعذّر إرسال الطلب الآن. تأكد من اتصالك أو راسلنا مباشرة على khaledalnemer@gmail.com';
+        btn.disabled = false; btn.textContent = original;
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
