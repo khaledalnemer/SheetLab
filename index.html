@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SheetLab — بياناتك جاهزة للقرار خلال ساعات</title>
-<meta name="description" content="خدمات بيانات مصغّرة سريعة: تنظيف ودمج وتحويل الملفات، تحليل الاستبيانات، ولوحات Power BI. تسليم بالساعات، وسريّة تُحذف خلال 14 يوماً.">
+<meta name="description" content="خدمات بيانات سريعة: تحليل الاستبيانات، لوحات Power BI، مراجعة SQL و DAX، وأتمتة بايثون. عرض سعر خلال ساعتين، تسليم بالساعات، وبياناتك تُحذف خلال 14 يوماً.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -62,6 +62,15 @@
   .btn-outline:hover{background:hsl(var(--accent));}
   .btn-lg{height:2.85rem; padding:0 1.5rem; font-size:.95rem;}
   .btn-block{width:100%;}
+  .btn-sm{height:2.15rem; padding:0 .9rem; font-size:.8rem;}
+  .svc .order-svc{width:100%; margin-top:.9rem;}
+
+  /* floating whatsapp */
+  .wa-float{position:fixed; bottom:1.25rem; left:1.25rem; z-index:60;
+    width:3.25rem; height:3.25rem; border-radius:9999px; background:#25D366;
+    display:grid; place-items:center; box-shadow:0 4px 14px hsl(240 10% 3.9% / .22);
+    transition:transform .15s;}
+  .wa-float:hover{transform:scale(1.07);}
 
   /* hero */
   .hero{padding:4.5rem 0 3.5rem; text-align:center;}
@@ -178,16 +187,16 @@
   <div class="wrap">
     <span class="eyebrow"><span class="dot"></span>خدمات بيانات مصغّرة للأفراد والمنشآت الصغيرة والمتوسطة</span>
     <h1>بياناتك جاهزة للقرار خلال ساعات لا أسابيع</h1>
-    <p class="lead">نحوّل ملفاتك غير المنظّمة إلى بيانات قابلة للاستخدام — تنظيف، دمج، تحويل، تحليل استبيانات، ولوحات Power BI. بسريّة تامة تُحذف بعد التسليم.</p>
+    <p class="lead">نحوّل بياناتك الخام إلى قرارات واضحة — تحليل استبيانات، لوحات Power BI، مراجعة SQL و DAX، وأتمتة بايثون. عرض سعر خلال ساعتين، وبياناتك تُحذف بعد التسليم.</p>
     <div class="cta">
       <a href="#request" class="btn btn-primary btn-lg">ارفع طلبك الآن</a>
       <a href="#services" class="btn btn-outline btn-lg">تصفّح الخدمات</a>
     </div>
     <div class="trust">
+      <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="hsl(173 58% 39%)" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>عرض سعر خلال ساعتين</span>
       <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="hsl(173 58% 39%)" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>تسليم بالساعات</span>
-      <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="hsl(173 58% 39%)" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>سريّة تُحذف خلال 14 يوماً</span>
+      <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="hsl(173 58% 39%)" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>بياناتك تُحذف خلال 14 يوماً</span>
       <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="hsl(173 58% 39%)" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>ضمان إعادة تنفيذ أو استرداد</span>
-      <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="hsl(173 58% 39%)" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>أسعار ثابتة معلومة</span>
     </div>
   </div>
 </header>
@@ -206,36 +215,42 @@
         <h3>تحليل الاستبيانات<span class="en">Survey Analytics</span></h3>
         <p>تحليل حتى 1000 استجابة، مع تقرير PDF ورسوم بيانية واضحة.</p>
         <div class="meta"><span class="price">يبدأ من 250 <small>ريال</small></span><span class="time">يوم عمل</span></div>
+        <a href="#request" class="btn btn-outline btn-sm order-svc" data-service="تحليل الاستبيانات — Survey Analytics">اطلب هذه الخدمة</a>
       </div>
 
       <div class="svc">
         <h3>لوحة Power BI<span class="en">Power BI Dashboard</span></h3>
         <p>لوحة من صفحة واحدة: 5 مؤشرات و3 رسوم، تُسلَّم بصيغة PBIX و PDF.</p>
         <div class="meta"><span class="price">يبدأ من 350 <small>ريال</small></span><span class="time">يوم عمل</span></div>
+        <a href="#request" class="btn btn-outline btn-sm order-svc" data-service="لوحة Power BI — Power BI Dashboard">اطلب هذه الخدمة</a>
       </div>
 
       <div class="svc">
         <h3>فحص صحة اللوحة<span class="en">Dashboard Health Check</span></h3>
         <p>مراجعة ملف PBIX واحد وتقرير تحسينات وملاحظات تقنية للأداء.</p>
         <div class="meta"><span class="price">يبدأ من 200 <small>ريال</small></span><span class="time">ساعتان</span></div>
+        <a href="#request" class="btn btn-outline btn-sm order-svc" data-service="فحص صحة اللوحة — Dashboard Health Check">اطلب هذه الخدمة</a>
       </div>
 
       <div class="svc">
         <h3>مراجعة SQL<span class="en">SQL Review</span></h3>
         <p>مراجعة حتى 500 سطر، نسخة محسّنة وملاحظات أداء عملية.</p>
         <div class="meta"><span class="price">يبدأ من 150 <small>ريال</small></span><span class="time">~ساعة</span></div>
+        <a href="#request" class="btn btn-outline btn-sm order-svc" data-service="مراجعة SQL — SQL Review">اطلب هذه الخدمة</a>
       </div>
 
       <div class="svc">
         <h3>مراجعة DAX<span class="en">DAX Review</span></h3>
         <p>مراجعة حتى 15 Measure، نسخة محسّنة وتوصيات للتحسين.</p>
         <div class="meta"><span class="price">يبدأ من 150 <small>ريال</small></span><span class="time">~ساعة</span></div>
+        <a href="#request" class="btn btn-outline btn-sm order-svc" data-service="مراجعة DAX — DAX Review">اطلب هذه الخدمة</a>
       </div>
 
       <div class="svc">
         <h3>أتمتة بايثون<span class="en">Python Automation</span></h3>
         <p>سكربت لأتمتة عملية متكررة، مع الكود ودليل استخدام واضح.</p>
         <div class="meta"><span class="price">يبدأ من 400 <small>ريال</small></span><span class="time">يوم عمل</span></div>
+        <a href="#request" class="btn btn-outline btn-sm order-svc" data-service="أتمتة بايثون — Python Automation">اطلب هذه الخدمة</a>
       </div>
 
     </div>
@@ -251,17 +266,17 @@
     </div>
     <div class="steps">
       <div class="step">
-        <div class="num">١</div>
+        <div class="num">1</div>
         <h4>ارفع طلبك</h4>
-        <p>عبّئ النموذج بوصف مختصر لما تحتاجه وأرفق رابط الملف. نردّ عليك بعرض سعر نهائي ومدة تنفيذ.</p>
+        <p>عبّئ النموذج بوصف مختصر لما تحتاجه وأرفق رابط الملف. نردّ عليك بعرض سعر نهائي ومدة تنفيذ خلال ساعتين في أوقات العمل.</p>
       </div>
       <div class="step">
-        <div class="num">٢</div>
+        <div class="num">2</div>
         <h4>ننفّذ العمل</h4>
         <p>نبدأ بعد موافقتك، وننفّذ بجودة وسرعة خلال المدة المتفق عليها، مع ضمان إعادة التنفيذ إن لزم.</p>
       </div>
       <div class="step">
-        <div class="num">٣</div>
+        <div class="num">3</div>
         <h4>تستلم وتُحذف بياناتك</h4>
         <p>تستلم الملف النهائي وتقرير الملاحظات، وتُحذف بياناتك من عندنا خلال 14 يوماً من التسليم.</p>
       </div>
@@ -290,7 +305,7 @@
       <div class="card">
         <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="hsl(240 5.9% 10%)" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
         <h4>أسعار وضمان</h4>
-        <p>أسعار واضحة وضمان إعادة تنفيذ أو استرداد إن لم تكن راضياً.</p>
+        <p>أسعار واضحة، تعديل مجاني بعد التسليم، واسترداد كامل إن لم نلتزم بما اتفقنا عليه.</p>
       </div>
       <div class="card">
         <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="hsl(240 5.9% 10%)" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-5"/></svg></div>
@@ -307,7 +322,7 @@
     <div class="sec-head">
       <div class="label">ارفع طلبك</div>
       <h2>أخبرنا بما تحتاجه</h2>
-      <p>عبّئ النموذج وسنردّ عليك بعرض سعر نهائي ومدة تنفيذ في أقرب وقت.</p>
+      <p>نردّ عليك بعرض سعر نهائي ومدة تنفيذ خلال ساعتين في أوقات العمل. السعر النهائي قبل أي التزام — لا تدفع شيئاً الآن.</p>
     </div>
     <div class="formwrap">
       <div class="formcard" id="formCard">
@@ -351,8 +366,8 @@
           </div>
 
           <div class="field">
-            <label for="details">تفاصيل الطلب</label>
-            <textarea id="details" name="التفاصيل" required placeholder="اشرح باختصار ما تحتاجه: نوع الملف، حجمه التقريبي (عدد الصفوف/الأعمدة)، والنتيجة المطلوبة."></textarea>
+            <label for="details">تفاصيل الطلب <span class="opt">(اختياري — كلما زادت التفاصيل كان عرض السعر أدق)</span></label>
+            <textarea id="details" name="التفاصيل" placeholder="اشرح باختصار ما تحتاجه: نوع الملف، حجمه التقريبي (عدد الصفوف/الأعمدة)، والنتيجة المطلوبة."></textarea>
           </div>
 
           <div class="field">
@@ -380,13 +395,19 @@
       </div>
       <div class="foot-contact">
         <div style="color:hsl(var(--foreground)); font-weight:600; margin-bottom:.2rem;">تواصل معنا</div>
-        <a href="mailto:khaledalnemer@gmail.com">khaledalnemer@gmail.com</a>
+        <a href="mailto:sheetlabstudio@gmail.com">sheetlabstudio@gmail.com</a>
+        <a href="https://wa.me/966557410277" target="_blank" rel="noopener">واتساب: 0557410277</a>
         <a href="#request">ارفع طلباً</a>
       </div>
     </div>
     <div class="copyright">© SheetLab — جميع الحقوق محفوظة.</div>
   </div>
 </footer>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/966557410277?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20SheetLab%D8%8C%20%D8%A3%D8%AD%D8%AA%D8%A7%D8%AC%20%D8%AE%D8%AF%D9%85%D8%A9%20%D8%A8%D9%8A%D8%A7%D9%86%D8%A7%D8%AA" class="wa-float" target="_blank" rel="noopener" aria-label="تواصل عبر واتساب">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="#ffffff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
 
 <script>
   (function(){
@@ -396,6 +417,15 @@
     var form = document.getElementById('requestForm');
     var statusEl = document.getElementById('formStatus');
     var card = document.getElementById('formCard');
+
+    // أزرار «اطلب هذه الخدمة» — تختار الخدمة تلقائياً في النموذج
+    var svcButtons = document.querySelectorAll('a[data-service]');
+    for(var i = 0; i < svcButtons.length; i++){
+      svcButtons[i].addEventListener('click', function(){
+        var sel = document.getElementById('service');
+        if(sel){ sel.value = this.getAttribute('data-service'); }
+      });
+    }
 
     form.addEventListener('submit', function(e){
       e.preventDefault();
@@ -431,7 +461,7 @@
       })
       .catch(function(){
         statusEl.className = 'err';
-        statusEl.textContent = 'تعذّر إرسال الطلب الآن. تأكد من اتصالك أو راسلنا مباشرة على khaledalnemer@gmail.com';
+        statusEl.textContent = 'تعذّر إرسال الطلب الآن. تأكد من اتصالك أو راسلنا مباشرة على sheetlabstudio@gmail.com';
         btn.disabled = false; btn.textContent = original;
       });
     });
