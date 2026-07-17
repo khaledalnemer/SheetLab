@@ -125,6 +125,16 @@
   .why h4{margin:0 0 .3rem; font-size:.95rem; font-weight:600;}
   .why p{margin:0; font-size:.83rem; color:hsl(var(--muted-foreground));}
 
+  /* founder note */
+  .founder{margin-top:2rem; background:hsl(var(--secondary)); border:1px solid hsl(var(--border));
+    border-radius:var(--radius); padding:1.75rem; text-align:center; max-width:640px; margin-inline:auto;}
+  .founder-avatar{width:3rem; height:3rem; margin:0 auto .9rem; border-radius:9999px;
+    background:hsl(var(--primary)); color:hsl(var(--primary-foreground));
+    display:grid; place-items:center; font-size:1.25rem; font-weight:700;}
+  .founder-msg{margin:0 auto 1.1rem; font-size:.95rem; line-height:1.9; color:hsl(var(--foreground)); max-width:52ch;}
+  .founder-link{display:inline-flex; align-items:center; gap:.4rem; font-size:.85rem; font-weight:600;
+    color:hsl(var(--chart-2)); border-bottom:1px solid hsl(var(--chart-2) / .4); padding-bottom:1px;}
+
   /* form */
   .formwrap{max-width:640px; margin:0 auto;}
   .formcard{background:hsl(var(--card)); border:1px solid hsl(var(--border)); border-radius:var(--radius);
@@ -185,9 +195,9 @@
 <!-- HERO -->
 <header class="hero">
   <div class="wrap">
-    <span class="eyebrow"><span class="dot"></span>خدمات بيانات مصغّرة للأفراد والمنشآت الصغيرة والمتوسطة</span>
+    <span class="eyebrow"><span class="dot"></span>خدمات بيانات احترافية لأصحاب الأعمال والفرق الصغيرة</span>
     <h1>بياناتك جاهزة للقرار خلال ساعات لا أسابيع</h1>
-    <p class="lead">نحوّل بياناتك الخام إلى قرارات واضحة — تحليل استبيانات، لوحات Power BI، مراجعة SQL و DAX، وأتمتة بايثون. عرض سعر خلال ساعتين، وبياناتك تُحذف بعد التسليم.</p>
+    <p class="lead">هلا فيك في SheetLab. نأخذ بياناتك الخام ونحوّلها إلى قرارات واضحة — تحليل استبيانات، لوحات Power BI، مراجعة SQL و DAX، وأتمتة بايثون. نتعامل مع بياناتك وكأنها بياناتنا: بدقة وعناية، وعرض سعر يوصلك خلال ساعتين.</p>
     <div class="cta">
       <a href="#request" class="btn btn-primary btn-lg">ارفع طلبك الآن</a>
       <a href="#services" class="btn btn-outline btn-lg">تصفّح الخدمات</a>
@@ -207,13 +217,13 @@
     <div class="sec-head">
       <div class="label">الخدمات</div>
       <h2>اختر ما تحتاجه</h2>
-      <p>أسعار «تبدأ من» تُحسم نهائياً بعد الاطلاع على حجم الملف ونطاق العمل.</p>
+      <p>أسعار تبدأ من، ونتفق على السعر النهائي معك بشفافية حسب حجم عملك — بلا مفاجآت.</p>
     </div>
     <div class="grid">
 
       <div class="svc">
         <h3>تحليل الاستبيانات<span class="en">Survey Analytics</span></h3>
-        <p>تحليل حتى 1000 استجابة، مع تقرير PDF ورسوم بيانية واضحة.</p>
+        <p>نحلّل استبيانك ونخرج لك النتائج والرسوم جاهزة للعرض في تقرير PDF أنيق (يشمل حتى 1000 استجابة).</p>
         <div class="meta"><span class="price">يبدأ من 250 <small>ريال</small></span><span class="time">يوم عمل</span></div>
         <a href="#request" class="btn btn-outline btn-sm order-svc" data-service="تحليل الاستبيانات — Survey Analytics">اطلب هذه الخدمة</a>
       </div>
@@ -234,14 +244,14 @@
 
       <div class="svc">
         <h3>مراجعة SQL<span class="en">SQL Review</span></h3>
-        <p>مراجعة حتى 500 سطر، نسخة محسّنة وملاحظات أداء عملية.</p>
+        <p>نراجع استعلاماتك ونعيدها لك أسرع وأنظف، مع ملاحظات أداء عملية (يشمل حتى 500 سطر).</p>
         <div class="meta"><span class="price">يبدأ من 150 <small>ريال</small></span><span class="time">~ساعة</span></div>
         <a href="#request" class="btn btn-outline btn-sm order-svc" data-service="مراجعة SQL — SQL Review">اطلب هذه الخدمة</a>
       </div>
 
       <div class="svc">
         <h3>مراجعة DAX<span class="en">DAX Review</span></h3>
-        <p>مراجعة حتى 15 Measure، نسخة محسّنة وتوصيات للتحسين.</p>
+        <p>نحسّن معادلات DAX عندك لأداء أعلى ونتائج أدق، مع توصيات واضحة (يشمل حتى 15 Measure).</p>
         <div class="meta"><span class="price">يبدأ من 150 <small>ريال</small></span><span class="time">~ساعة</span></div>
         <a href="#request" class="btn btn-outline btn-sm order-svc" data-service="مراجعة DAX — DAX Review">اطلب هذه الخدمة</a>
       </div>
@@ -310,8 +320,15 @@
       <div class="card">
         <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="hsl(240 5.9% 10%)" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-5"/></svg></div>
         <h4>تخصّص في البيانات</h4>
-        <p>تركيز على بيانات المنشآت الصغيرة والمتوسطة في الخليج والاستبيانات العربية.</p>
+        <p>خبرة قريبة من واقع الأعمال في الخليج والبيانات والاستبيانات العربية.</p>
       </div>
+    </div>
+
+    <!-- FOUNDER NOTE -->
+    <div class="founder">
+      <div class="founder-avatar">خ</div>
+      <p class="founder-msg">وراء SheetLab شخص حقيقي يهتم بشغلك. أنا خالد، متخصص في البيانات، وبنفسي أراجع طلبك وأنفّذه خطوة بخطوة. تواصل معي مباشرة في أي وقت — يسعدني أساعدك.</p>
+      <a href="https://wa.me/966557410277" target="_blank" rel="noopener" class="founder-link">راسلني على واتساب</a>
     </div>
   </div>
 </section>
@@ -390,8 +407,8 @@
     <div class="foot-row">
       <div>
         <div class="brand"><span style="font-weight:700">SheetLab</span></div>
-        <p>نحوّل الملفات غير المنظّمة إلى بيانات جاهزة للقرار خلال ساعات، بسريّة تُحذف بعد التسليم.</p>
-        <p style="margin-top:.75rem; font-size:.78rem;">لا نستقبل: البيانات الطبية، البنكية، بطاقات الائتمان، البيانات الحكومية الحساسة، الرواتب، والهوية الوطنية.</p>
+        <p>نحوّل بياناتك الخام إلى قرارات واضحة خلال ساعات، ونعاملها بسريّة تامة تُحذف بعد التسليم.</p>
+        <p style="margin-top:.75rem; font-size:.78rem;">حرصاً على خصوصيتك والامتثال للأنظمة، نركّز على بياناتك التشغيلية والتجارية دون البيانات الحسّاسة (الطبية، البنكية، الحكومية، والهوية الوطنية).</p>
       </div>
       <div class="foot-contact">
         <div style="color:hsl(var(--foreground)); font-weight:600; margin-bottom:.2rem;">تواصل معنا</div>
