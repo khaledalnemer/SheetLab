@@ -336,15 +336,11 @@
     <div class="formwrap">
       <div class="formcard" id="formCard">
         <!--
-          آلية الإرسال: FormSubmit — الطلبات تصل إلى khaledalnemer@gmail.com
-          مهم: أول مرة تُرسَل رسالة، يصلك إيميل تفعيل من FormSubmit لمرة واحدة — فعّله ليبدأ الاستقبال.
-          للخصوصية لاحقاً: بعد التفعيل يمكنك استبدال الإيميل في الرابط برمز عشوائي من FormSubmit.
+          آلية الإرسال: Google Apps Script — يولّد رقم طلب يومي RRQ-YYYYMMDD-NNN،
+          يسجّل الطلب في Google Sheet، ويرسل إيميل HTML للمالك ورداً تلقائياً للعميل.
+          كود الـ backend في: backend/Code.gs
         -->
-        <form id="requestForm" action="https://formsubmit.co/khaledalnemer@gmail.com" method="POST">
-          <!-- إعدادات FormSubmit -->
-          <input type="hidden" name="_subject" value="طلب جديد من صفحة SheetLab">
-          <input type="hidden" name="_template" value="table">
-          <input type="hidden" name="_captcha" value="false">
+        <form id="requestForm" method="POST">
           <!-- مصيدة السبام (اتركها فارغة) -->
           <input type="text" name="_honey" class="honey" tabindex="-1" autocomplete="off">
 
@@ -422,6 +418,9 @@
 
 <script>
   (function(){
+    // رابط Google Apps Script Web App (backend/Code.gs)
+    var ENDPOINT = 'https://script.google.com/macros/s/AKfycbxA9KUYtARPafrfusoYZA98z7WfIbJaHZWZ7SDtI2Zt-yIwoFnrTpEgeVqEaOBuCTIXNw/exec';
+
     var form = document.getElementById('requestForm');
     var statusEl = document.getElementById('formStatus');
     var card = document.getElementById('formCard');
@@ -437,19 +436,22 @@
       statusEl.className = ''; statusEl.textContent = '';
 
       var data = new FormData(form);
-      fetch('https://formsubmit.co/ajax/khaledalnemer@gmail.com', {
+      fetch(ENDPOINT, {
         method:'POST',
-        headers:{'Accept':'application/json'},
         body:data
       })
-      .then(function(res){ return res.json().then(function(j){ return {ok:res.ok, body:j}; }); })
+      .then(function(res){ return res.json(); })
       .then(function(r){
-        if(r.ok){
+        if(r && r.ok){
+          var idHtml = r.requestId
+            ? '<div style="display:inline-block;margin-top:.9rem;background:hsl(var(--secondary));border:1px solid hsl(var(--border));border-radius:9999px;padding:.4rem .9rem;font-size:.82rem;font-weight:600;letter-spacing:.02em;">رقم طلبك: ' + r.requestId + '</div>'
+            : '';
           card.innerHTML =
             '<div class="success">' +
               '<div class="check"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="hsl(173 58% 39%)" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></div>' +
               '<h3>تمّ استلام طلبك</h3>' +
-              '<p>شكراً لك. سنراجع طلبك ونردّ عليك بعرض سعر نهائي ومدة تنفيذ في أقرب وقت.</p>' +
+              '<p>شكراً لك. سنراجع طلبك ونردّ عليك بعرض سعر نهائي ومدة تنفيذ في أقرب وقت. أرسلنا تأكيداً إلى بريدك.</p>' +
+              idHtml +
             '</div>';
         } else {
           throw new Error('failed');
