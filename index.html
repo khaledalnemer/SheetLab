@@ -135,6 +135,38 @@
   .founder-link{display:inline-flex; align-items:center; gap:.4rem; font-size:.85rem; font-weight:600;
     color:hsl(var(--chart-2)); border-bottom:1px solid hsl(var(--chart-2) / .4); padding-bottom:1px;}
 
+  /* sample dashboard mockup */
+  .mock-badge{display:inline-flex; align-items:center; gap:.4rem; font-size:.72rem; font-weight:500;
+    color:hsl(var(--muted-foreground)); background:hsl(var(--secondary)); border:1px solid hsl(var(--border));
+    padding:.3rem .7rem; border-radius:9999px;}
+  .dash{max-width:960px; margin:0 auto; background:hsl(var(--card)); border:1px solid hsl(var(--border));
+    border-radius:calc(var(--radius) + 2px); box-shadow:0 8px 30px hsl(240 10% 3.9% / .08); overflow:hidden;}
+  .dash-bar{display:flex; align-items:center; gap:.5rem; padding:.75rem 1rem; border-bottom:1px solid hsl(var(--border));
+    background:hsl(var(--secondary));}
+  .dash-dots{display:flex; gap:.35rem;}
+  .dash-dots span{width:.6rem; height:.6rem; border-radius:9999px; background:hsl(var(--border));}
+  .dash-title{font-size:.8rem; color:hsl(var(--muted-foreground)); margin-inline-start:.5rem;}
+  .dash-body{padding:1.25rem;}
+  .kpis{display:grid; grid-template-columns:repeat(5,1fr); gap:.75rem; margin-bottom:1rem;}
+  .kpi{background:hsl(var(--background)); border:1px solid hsl(var(--border)); border-radius:var(--radius); padding:.85rem;}
+  .kpi .k-label{font-size:.7rem; color:hsl(var(--muted-foreground)); margin-bottom:.35rem;}
+  .kpi .k-value{font-size:1.15rem; font-weight:700; letter-spacing:-.02em;}
+  .kpi .k-delta{font-size:.68rem; font-weight:600; margin-top:.25rem;}
+  .k-up{color:hsl(var(--chart-2));}
+  .k-down{color:hsl(var(--destructive));}
+  .charts{display:grid; grid-template-columns:2fr 1fr; gap:.75rem;}
+  .chart{background:hsl(var(--background)); border:1px solid hsl(var(--border)); border-radius:var(--radius); padding:1rem;}
+  .chart h5{margin:0 0 .9rem; font-size:.82rem; font-weight:600; color:hsl(var(--foreground));}
+  .chart-row{display:grid; grid-template-columns:1fr 1fr; gap:.75rem; margin-top:.75rem;}
+  .legend{display:flex; flex-direction:column; gap:.5rem; font-size:.75rem; color:hsl(var(--muted-foreground));}
+  .legend span{display:inline-flex; align-items:center; gap:.45rem;}
+  .legend i{width:.7rem; height:.7rem; border-radius:3px; flex:0 0 auto;}
+  @media(max-width:720px){
+    .kpis{grid-template-columns:repeat(2,1fr);}
+    .charts{grid-template-columns:1fr;}
+    .chart-row{grid-template-columns:1fr;}
+  }
+
   /* form */
   .formwrap{max-width:640px; margin:0 auto;}
   .formcard{background:hsl(var(--card)); border:1px solid hsl(var(--border)); border-radius:var(--radius);
@@ -185,6 +217,7 @@
     <div class="logo"><span class="mark">SL</span>SheetLab</div>
     <div class="nav-links">
       <a href="#services">الخدمات</a>
+      <a href="#samples">نماذج</a>
       <a href="#how">كيف نعمل</a>
       <a href="#why">لماذا نحن</a>
     </div>
@@ -329,6 +362,105 @@
       <div class="founder-avatar">خ</div>
       <p class="founder-msg">وراء SheetLab شخص حقيقي يهتم بشغلك. أنا خالد، متخصص في البيانات، وبنفسي أراجع طلبك وأنفّذه خطوة بخطوة. تواصل معي مباشرة في أي وقت — يسعدني أساعدك.</p>
       <a href="https://wa.me/966557410277" target="_blank" rel="noopener" class="founder-link">راسلني على واتساب</a>
+    </div>
+  </div>
+</section>
+
+<!-- SAMPLES -->
+<section class="block" id="samples">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="label">نماذج من أعمالنا</div>
+      <h2>هذا شكل ما ستستلمه</h2>
+      <p>مثال على لوحة Power BI نُسلّمها: 5 مؤشرات و3 رسوم في صفحة واحدة واضحة، جاهزة لاجتماعك القادم.</p>
+      <div style="margin-top:1rem;"><span class="mock-badge"><span class="dot" style="width:.4rem;height:.4rem;border-radius:9999px;background:hsl(var(--chart-2));"></span>نموذج توضيحي ببيانات وهمية</span></div>
+    </div>
+
+    <div class="dash" role="img" aria-label="نموذج لوحة Power BI ببيانات وهمية">
+      <div class="dash-bar">
+        <div class="dash-dots"><span></span><span></span><span></span></div>
+        <div class="dash-title">لوحة أداء المبيعات — الربع الرابع (نموذج)</div>
+      </div>
+      <div class="dash-body">
+
+        <!-- 5 KPIs -->
+        <div class="kpis">
+          <div class="kpi"><div class="k-label">إجمالي المبيعات</div><div class="k-value">1.24M</div><div class="k-delta k-up">▲ 18.6%</div></div>
+          <div class="kpi"><div class="k-label">عدد الطلبات</div><div class="k-value">3,480</div><div class="k-delta k-up">▲ 9.2%</div></div>
+          <div class="kpi"><div class="k-label">متوسط قيمة الطلب</div><div class="k-value">356</div><div class="k-delta k-up">▲ 4.1%</div></div>
+          <div class="kpi"><div class="k-label">العملاء الجدد</div><div class="k-value">512</div><div class="k-delta k-up">▲ 12.0%</div></div>
+          <div class="kpi"><div class="k-label">نسبة الإرجاع</div><div class="k-value">2.3%</div><div class="k-delta k-down">▼ 0.4%</div></div>
+        </div>
+
+        <!-- 3 charts -->
+        <div class="charts">
+          <div class="chart">
+            <h5>المبيعات الشهرية (ألف ريال)</h5>
+            <svg viewBox="0 0 320 150" width="100%" height="150" role="presentation">
+              <line x1="8" y1="120" x2="312" y2="120" stroke="hsl(240 5.9% 90%)" stroke-width="1"/>
+              <g fill="hsl(173 58% 39%)">
+                <rect x="16"  y="70"  width="26" height="50"  rx="3"/>
+                <rect x="58"  y="52"  width="26" height="68"  rx="3"/>
+                <rect x="100" y="80"  width="26" height="40"  rx="3"/>
+                <rect x="142" y="40"  width="26" height="80"  rx="3"/>
+                <rect x="184" y="28"  width="26" height="92"  rx="3"/>
+                <rect x="226" y="46"  width="26" height="74"  rx="3"/>
+                <rect x="268" y="18"  width="26" height="102" rx="3"/>
+              </g>
+              <g fill="hsl(240 3.8% 46.1%)" font-size="9" text-anchor="middle" font-family="Inter,Tahoma,sans-serif">
+                <text x="29"  y="135">يناير</text>
+                <text x="71"  y="135">فبراير</text>
+                <text x="113" y="135">مارس</text>
+                <text x="155" y="135">أبريل</text>
+                <text x="197" y="135">مايو</text>
+                <text x="239" y="135">يونيو</text>
+                <text x="281" y="135">يوليو</text>
+              </g>
+            </svg>
+          </div>
+          <div class="chart">
+            <h5>المبيعات حسب الفئة</h5>
+            <div class="chart-row" style="grid-template-columns:1fr 1fr; align-items:center; margin-top:0;">
+              <svg viewBox="0 0 42 42" width="100%" height="120" role="presentation">
+                <circle cx="21" cy="21" r="15.915" fill="none" stroke="hsl(240 4.8% 92%)" stroke-width="6"/>
+                <circle cx="21" cy="21" r="15.915" fill="none" stroke="hsl(173 58% 39%)"  stroke-width="6" stroke-dasharray="40 60" stroke-dashoffset="25"/>
+                <circle cx="21" cy="21" r="15.915" fill="none" stroke="hsl(217 91% 60%)"  stroke-width="6" stroke-dasharray="28 72" stroke-dashoffset="85"/>
+                <circle cx="21" cy="21" r="15.915" fill="none" stroke="hsl(38 92% 50%)"   stroke-width="6" stroke-dasharray="20 80" stroke-dashoffset="57"/>
+                <circle cx="21" cy="21" r="15.915" fill="none" stroke="hsl(262 83% 66%)"  stroke-width="6" stroke-dasharray="12 88" stroke-dashoffset="37"/>
+              </svg>
+              <div class="legend">
+                <span><i style="background:hsl(173 58% 39%)"></i>إلكترونيات 40%</span>
+                <span><i style="background:hsl(217 91% 60%)"></i>أثاث 28%</span>
+                <span><i style="background:hsl(38 92% 50%)"></i>ملابس 20%</span>
+                <span><i style="background:hsl(262 83% 66%)"></i>أخرى 12%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="chart" style="margin-top:.75rem;">
+          <h5>اتجاه الإيرادات التراكمية</h5>
+          <svg viewBox="0 0 640 140" width="100%" height="130" role="presentation">
+            <defs>
+              <linearGradient id="areaFill" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="hsl(173 58% 39%)" stop-opacity="0.25"/>
+                <stop offset="100%" stop-color="hsl(173 58% 39%)" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <polygon points="10,110 100,92 190,98 280,70 370,58 460,40 550,30 630,16 630,130 10,130" fill="url(#areaFill)"/>
+            <polyline points="10,110 100,92 190,98 280,70 370,58 460,40 550,30 630,16" fill="none" stroke="hsl(173 58% 39%)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+            <g fill="hsl(173 58% 39%)">
+              <circle cx="10" cy="110" r="3"/><circle cx="100" cy="92" r="3"/><circle cx="190" cy="98" r="3"/><circle cx="280" cy="70" r="3"/>
+              <circle cx="370" cy="58" r="3"/><circle cx="460" cy="40" r="3"/><circle cx="550" cy="30" r="3"/><circle cx="630" cy="16" r="3"/>
+            </g>
+          </svg>
+        </div>
+
+      </div>
+    </div>
+
+    <div style="text-align:center; margin-top:1.75rem;">
+      <a href="#request" class="btn btn-primary btn-lg">اطلب لوحتك الآن</a>
     </div>
   </div>
 </section>
