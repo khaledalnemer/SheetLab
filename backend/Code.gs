@@ -110,6 +110,21 @@ function escapeHtml(s) {
     .replace(/"/g, '&quot;');
 }
 
+/** يبني رابط واتساب جاهز برسالة ترحيب — يعيد '' إذا لا يوجد رقم صالح */
+function waLink(phone, name, requestId) {
+  let p = String(phone || '').replace(/[^\d]/g, '');
+  if (p.indexOf('00966') === 0) { p = p.substring(2); }        // 00966 -> 966
+  if (p.indexOf('966') === 0) { /* جاهز */ }
+  else if (p.indexOf('0') === 0) { p = '966' + p.substring(1); } // 05xxxxxxxx -> 9665xxxxxxxx
+  else if (p.length === 9) { p = '966' + p; }                    // 5xxxxxxxx  -> 9665xxxxxxxx
+  if (p.length < 12) { return ''; }
+
+  const hi = name ? ('هلا والله فيك ' + name) : 'هلا والله فيك';
+  const msg = hi + '، وصلنا طلبك ' + requestId + ' وسعيدين بخدمتك في ' + BRAND +
+    '. نراجع طلبك ونرجع لك بعرض السعر والمدة، وتقدر تتواصل معنا هنا مباشرة في أي وقت.';
+  return 'https://wa.me/' + p + '?text=' + encodeURIComponent(msg);
+}
+
 /** إيميل HTML للمالك */
 function ownerEmailHtml(requestId, timestamp, d) {
   const fields = [
@@ -139,6 +154,13 @@ function ownerEmailHtml(requestId, timestamp, d) {
       '</tr>';
   }).join('');
 
+  const wa = waLink(d.whatsapp, d.name, requestId);
+  const waRow = wa
+    ? '<tr><td style="padding:0 0 20px;">' +
+        '<a href="' + escapeHtml(wa) + '" style="display:inline-block;background:#25D366;color:#ffffff;font-size:14px;font-weight:600;text-decoration:none;padding:11px 20px;border-radius:8px;">ردّ على العميل عبر واتساب</a>' +
+      '</td></tr>'
+    : '';
+
   return baseEmail(
     '<tr><td style="padding:0 0 20px;">' +
       '<div style="display:inline-block;background:#f0fdfa;border:1px solid #99f6e4;color:#0f766e;font-size:13px;font-weight:700;letter-spacing:.02em;padding:8px 14px;border-radius:9999px;">' +
@@ -146,6 +168,7 @@ function ownerEmailHtml(requestId, timestamp, d) {
       '</div>' +
       '<div style="color:#71717a;font-size:12px;margin-top:10px;">' + escapeHtml(timestamp) + '</div>' +
     '</td></tr>' +
+    waRow +
     '<tr><td>' +
       '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e4e4e7;border-radius:10px;border-collapse:separate;overflow:hidden;">' +
         rows +
